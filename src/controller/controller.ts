@@ -14,6 +14,7 @@ export class Controller {
             console.warn(e)
         }
     }
+
     static async createUser(req: IncomingMessage, res: ServerResponse): Promise<void> {
         try {
             let data: string = '';

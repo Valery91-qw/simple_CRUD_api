@@ -5,8 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/server.ts",
-    "dev": "nodemon ./src/server.ts"
+    "start:dev": "nodemon ./src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +25,7 @@
   },
   "dependencies": {
     "@types/uuid": "^8.3.4",
+    "dotenv": "^16.0.1",
     "uuid": "^8.3.2"
   }
 }

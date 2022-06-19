@@ -1,8 +1,9 @@
 import http from "http";
-import {urlParser} from "./helpers/urlParser";
-import {Controller} from "./controller/controller";
+import { urlParser } from "./helpers/urlParser";
+import { Controller } from "./controller/controller";
+import { config } from "dotenv";
 
-const PORT = 4040;
+config()
 
 const server = http.createServer(async (req, res) => {
     const { pathname } = await urlParser(req.url)
@@ -28,6 +29,6 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`)
+server.listen(process.env.PORT, () => {
+    console.log(`Server is running on port: ${process.env.PORT}`)
 })
