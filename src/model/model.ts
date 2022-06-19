@@ -25,6 +25,10 @@ class Store {
         this.users.push(newUser);
         return newUser;
     }
+
+    async getUser(userId: string): Promise<IUser | undefined> {
+        return this.users.find(el => el.id === userId)
+    }
 }
 
 const model = new Store();
