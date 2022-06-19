@@ -1,20 +1,25 @@
 import {v4 as uuidv4 } from "uuid";
 
-type User = {
-    id: string
+export interface IRowUser {
     username: string
     age: string
     hobbies: string[]
 }
 
-class Store {
-    users: Array<User> = [];
+interface IUser extends IRowUser {
+    id: string
+}
 
-    async getAllUsers(): Promise<Array<User>> {
+
+
+class Store {
+    users: Array<IUser> = [];
+
+    async getAllUsers(): Promise<Array<IUser>> {
         return this.users;
     }
 
-    async createUser(user: Pick<User, "username" | "age" | "hobbies">): Promise<User> {
+    async createUser(user: IRowUser): Promise<IUser> {
         const id = uuidv4();
         const newUser = {id, ...user};
         this.users.push(newUser);
