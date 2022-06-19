@@ -34,6 +34,12 @@ class Store {
         this.users = this.users.map(user => user.id === userId ? {...user, ...rowUser} : user )
         return this.users.find(el => el.id === userId)
     }
+
+    async deleteUser(userId: string): Promise<boolean> {
+        const prevLength = this.users.length;
+        this.users = this.users.filter(user => user.id !== userId);
+        return this.users.length !== prevLength;
+    }
 }
 
 const model = new Store();

@@ -100,4 +100,21 @@ export class Controller {
             res.end(JSON.stringify({message: `invalid UUID`}))
         }
     }
+
+    static async deleteUser(req: IncomingMessage, res: ServerResponse, userId: string) {
+        const isValidUUID = validate(userId)
+        if(isValidUUID) {
+           const isDeleted = await model.deleteUser(userId)
+           if(isDeleted) {
+               res.writeHead(204, {"Content-Type": "application/json"})
+               res.end(JSON.stringify({ message: "User deleted" }))
+           } else {
+               res.writeHead(404, {"Content-Type": "application/json"})
+               res.end(JSON.stringify({message: `user not found`}))
+           }
+        } else {
+            res.writeHead(400, {"Content-Type": "application/json"})
+            res.end(JSON.stringify({message: `invalid UUID`}))
+        }
+    }
 }
