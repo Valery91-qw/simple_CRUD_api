@@ -1,4 +1,4 @@
-import {v4 as uuidv4 } from "uuid";
+import {v4 as uuidv4} from "uuid";
 
 export interface IRowUser {
     username: string
@@ -27,6 +27,11 @@ class Store {
     }
 
     async getUser(userId: string): Promise<IUser | undefined> {
+        return this.users.find(el => el.id === userId)
+    }
+
+    async updateUser(rowUser: IRowUser, userId: string): Promise<IUser | undefined> {
+        this.users = this.users.map(user => user.id === userId ? {...user, ...rowUser} : user )
         return this.users.find(el => el.id === userId)
     }
 }

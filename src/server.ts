@@ -14,9 +14,13 @@ const server = http.createServer(async (req, res) => {
         const params = pathname?.split('/')
         const userId = params[params.length - 1]
         await Controller.getUser(req, res, userId)
-    } else {
+    } else if(pathname?.includes("/api/users/") && req.method === "PUT") {
+        const params = pathname?.split('/')
+        const userId = params[params.length - 1]
+        await Controller.updateUser(req, res, userId)
+    }else {
         res.writeHead(404, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: "Route not found" }));
+        res.end(JSON.stringify({ message: "Route not found or invalid method for route" }));
     }
 });
 
