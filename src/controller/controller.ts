@@ -19,10 +19,10 @@ export class Controller {
         try {
             let data: string = '';
             req.on("data", (chunk) => {
-               data += chunk.toString();
+                data += chunk.toString();
             })
             req.on("end", async () => {
-                if(data !== undefined) {
+                if (data !== undefined) {
                     try {
                         const reqBody = JSON.parse(data);
                         const isValid = bodyValidator(reqBody);
@@ -46,9 +46,9 @@ export class Controller {
 
     static async getUser(req: IncomingMessage, res: ServerResponse, userId: string): Promise<void> {
         const isValidUUID = validate(userId)
-        if(isValidUUID) {
+        if (isValidUUID) {
             const user = await model.getUser(userId)
-            if(user) {
+            if (user) {
                 res.writeHead(201, {"Content-Type": "application/json"})
                 res.end(JSON.stringify(user))
             } else {
@@ -63,9 +63,9 @@ export class Controller {
 
     static async updateUser(req: IncomingMessage, res: ServerResponse, userId: string) {
         const isValidUUID = validate(userId)
-        if(isValidUUID) {
+        if (isValidUUID) {
             const user = await model.getUser(userId)
-            if(user) {
+            if (user) {
                 try {
                     let data: string = '';
                     req.on("data", (chunk) => {
@@ -104,15 +104,15 @@ export class Controller {
 
     static async deleteUser(req: IncomingMessage, res: ServerResponse, userId: string) {
         const isValidUUID = validate(userId)
-        if(isValidUUID) {
-           const isDeleted = await model.deleteUser(userId)
-           if(isDeleted) {
-               res.writeHead(204, {"Content-Type": "application/json"})
-               res.end(JSON.stringify({ message: "User deleted" }))
-           } else {
-               res.writeHead(404, {"Content-Type": "application/json"})
-               res.end(JSON.stringify({message: `user not found`}))
-           }
+        if (isValidUUID) {
+            const isDeleted = await model.deleteUser(userId)
+            if (isDeleted) {
+                res.writeHead(204, {"Content-Type": "application/json"})
+                res.end(JSON.stringify({message: "User deleted"}))
+            } else {
+                res.writeHead(404, {"Content-Type": "application/json"})
+                res.end(JSON.stringify({message: `user not found`}))
+            }
         } else {
             res.writeHead(400, {"Content-Type": "application/json"})
             res.end(JSON.stringify({message: `invalid UUID`}))

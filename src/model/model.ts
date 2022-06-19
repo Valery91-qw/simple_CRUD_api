@@ -11,7 +11,6 @@ interface IUser extends IRowUser {
 }
 
 
-
 class Store {
     users: Array<IUser> = [];
 
@@ -31,7 +30,7 @@ class Store {
     }
 
     async updateUser(rowUser: IRowUser, userId: string): Promise<IUser | undefined> {
-        this.users = this.users.map(user => user.id === userId ? {...user, ...rowUser} : user )
+        this.users = this.users.map(user => user.id === userId ? {...user, ...rowUser} : user)
         return this.users.find(el => el.id === userId)
     }
 
